@@ -70,15 +70,13 @@ flowchart LR
   Monitor --> Tracker["4. WIP tracker: batch POs per supplier"]
   Tracker --> SendSheet["5. Email supplier the WIP sheet"]
   SendSheet --> Reply["Supplier returns filled sheet"]
-  Reply -->|"reply in tracker thread"| AutoApply["Milestones update automatically"]
-  Reply -->|"arrives in connected mailbox"| InboxReview["6. Inbox: review, edit, Apply"]
+  Reply -->|"emailed back"| InboxReview["6. Inbox: review, edit, Apply"]
   Reply -->|"you upload it"| ManualUpload["Upload WIP sheet: review, Apply"]
-  AutoApply --> Monitor
   InboxReview --> Monitor
   ManualUpload --> Monitor
 ```
 
-A filled-in WIP sheet can come back three ways. A sheet attached to a reply on a WIP tracker's email thread is applied automatically. A sheet you upload yourself, or one that arrives through the Inbox, is applied only after you click **Apply**.
+A filled-in WIP sheet can come back two ways. A sheet the supplier emails back, whether as a reply on the tracker's thread or as a new email, lands in the Inbox. A sheet you upload yourself goes through the same review. Either way, orders change only after you click **Apply**.
 
 ## Run the whole flow in about 30 minutes
 
@@ -110,8 +108,13 @@ A filled-in WIP sheet can come back three ways. A sheet attached to a reply on a
 
     See [WIP tracker](/wip-tracker#create-a-tracker).
   </Step>
+  <Step title="Connect the WIP inbox mailbox">
+    Under **Settings → Order → Inbox**, connect the Gmail or Outlook mailbox your suppliers write to and turn the WIP inbox on. WIP emails and replies are sent from this mailbox. SourceReady reads the supplier emails and attachments that arrive in it and turns them into updates you review and apply.
+
+    See [Inbox](/inbox) and [Receive via inbox](/receive-via-inbox).
+  </Step>
   <Step title="Email the supplier the WIP sheet">
-    In the tracker, click **Email supplier**. The WIP sheet for its orders is attached for you. Check the recipients and message, then click **Send now**. When the supplier replies on that thread with the filled-in sheet, the milestones update automatically.
+    In the tracker's **Emails** tab, click **Email supplier**. The WIP sheet for its orders is attached for you, with the columns from the **WIP sheet** tab. Check the recipients and message, then click **Send now**. When the supplier replies with the filled-in sheet, the reply lands in the Inbox. Check the proposed changes there and click **Apply**.
 
     See [Email the supplier](/wip-tracker#email-the-supplier).
   </Step>
@@ -119,11 +122,6 @@ A filled-in WIP sheet can come back three ways. A sheet attached to a reply on a
     If a supplier sends back a filled-in sheet some other way, such as WeChat or a shared drive, upload it yourself: click **Upload WIP sheet** on the Orders list, click **Extract**, check the proposed changes, and click **Apply**. Watch the orders' milestones and health change.
 
     See [Upload a WIP sheet](/upload-wip-sheet).
-  </Step>
-  <Step title="Connect your inbox (optional)">
-    Under **Settings → Order → Inbox**, connect the Gmail or Outlook mailbox your suppliers write to. SourceReady reads their emails and attachments and turns them into updates you review and apply.
-
-    See [Inbox](/inbox) and [Receive via inbox](/receive-via-inbox).
   </Step>
 </Steps>
 

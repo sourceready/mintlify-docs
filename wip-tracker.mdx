@@ -1,10 +1,10 @@
 ---
 title: 'WIP tracker'
-description: "Batch one supplier's orders, send them a WIP sheet to fill in, and have their reply update your milestones automatically."
+description: "Batch one supplier's orders, send them a WIP sheet every week before their deadline, and review their reply in Inbox."
 icon: 'paper-plane'
 ---
 
-A **WIP tracker** groups the orders you follow up on with one supplier. From a tracker you generate a WIP sheet for those orders, email it to the supplier, and read their reply. When the supplier attaches the filled-in sheet to their reply, SourceReady updates the milestones for you.
+A **WIP tracker** groups the orders you follow up on with one supplier. Each tracker has a weekly deadline: SourceReady emails the supplier a WIP sheet for those orders before it, and reminds them if they haven't written back. Every reply lands in [Inbox](/inbox), where you review the proposed milestone updates and apply them.
 
 Open trackers from **Order → WIP tracker** in the left sidebar.
 
@@ -110,16 +110,19 @@ To create one from the tracker list:
     </Frame>
 
   </Step>
-  <Step title="Submit">
-    Click **Submit**. You can also click **Save as draft** and submit later.
+  <Step title="Set the follow-up schedule">
+    **Send the WIP sheet automatically** is on by default: the supplier's update is due every Friday at 5:00 PM in your time zone, the sheet goes out 3 days before, and one reminder follows 1 day after the deadline if they haven't written. Change any of these, or turn the switch off to send only by hand. See [Follow-up schedule](#follow-up-schedule).
+  </Step>
+  <Step title="Create">
+    Click **Create tracker**.
   </Step>
 </Steps>
 
 ## Inside a tracker
 
 <Frame caption="A tracker's Overview tab.">
-  ![WIP tracker page for WIP Demo with Email supplier, Generate WIP sheet, and
-  Edit buttons, the Overview tab showing Linked POs, a Watch list of overdue
+  ![WIP tracker page for WIP Demo with the Edit button, the Overview tab
+  showing Linked POs, a Watch list of overdue
   orders, and cards for Linked POs, At risk / delayed, Completed POs, Supplier,
   Owner, and Status](/images/wip/tracker-overview.png)
 </Frame>
@@ -140,8 +143,8 @@ To create one from the tracker list:
       <td>**Overview**</td>
       <td>
         The linked orders with their current step and ship date, a **Watch
-        list** of orders that need the supplier's confirmation, and counts of
-        linked, at-risk, and completed orders
+        list** of orders that need the supplier's confirmation, counts of
+        linked, at-risk, and completed orders, and the **Follow-up** card
       </td>
     </tr>
     <tr>
@@ -153,39 +156,58 @@ To create one from the tracker list:
       </td>
     </tr>
     <tr>
+      <td>**WIP sheet**</td>
+      <td>
+        The sheet the supplier receives, filled with the tracker's orders. Set
+        its columns here. See [The WIP sheet tab](#the-wip-sheet-tab)
+      </td>
+    </tr>
+    <tr>
       <td>**Emails**</td>
       <td>
-        The email thread with the supplier, including their replies and returned
-        sheets
+        Every email about the tracker's orders, newest first. See [The Emails
+        tab](#the-emails-tab)
       </td>
     </tr>
   </tbody>
 </table>
 
-Click **Edit** to change the tracker's name or owner. The supplier can't be changed. Delete a tracker from the **···** menu.
+Click **Edit** to change the tracker's name or owner. The supplier can't be changed. From the **···** menu, **Complete tracker** when the orders are done, or **Cancel tracker** or **Delete** it. Completing or cancelling a tracker stops its automatic emails.
 
-## Generate a WIP sheet
+## Follow-up schedule
 
-Click **Generate WIP sheet** to download a spreadsheet filled with the tracker's orders, ready for the supplier to complete.
+The **Follow-up** card on the **Overview** tab shows the schedule, when the sheet was last sent, when the next one goes out, and whether the supplier has written since: **Supplier wrote …**, or **No reply yet** with the time of the next reminder.
 
-<Frame caption='Choosing the columns of the WIP sheet.'>
-  ![WIP sheet dialog for the Apparel profile with Order columns set to Item
-  name, Customer, Quantity, and Ex-factory date, Plan date and Actual date
-  switches turned on, Notes off, and a preview of three
-  rows](/images/wip/tracker-generate-sheet.png)
-</Frame>
+Click **Schedule** to change it:
+
+- **Supplier update due every**: the weekly deadline, as a day and time in your time zone.
+- **Send the WIP sheet**: how many days before the deadline the sheet goes out, at 9:00 AM. The sheet uses the columns set on the [WIP sheet tab](#the-wip-sheet-tab).
+- **If the supplier hasn't written, remind**: how many days after the deadline, and up to how many times. A reminder is a reply on the same thread with an up-to-date sheet. Any supplier email linked to the tracker's orders after the last send stops the reminders, even a short "noted" on the thread. See [When the supplier replies](#when-the-supplier-replies) for how emails are linked.
+
+Turn off **Send the WIP sheet automatically** to pause. Click **Send now** on the card to send the sheet right away.
+
+<Note>
+  Automatic emails need the WIP inbox mailbox connected in **Settings → Order
+  → Inbox**. Without it, supplier replies can't be read, so nothing is sent.
+</Note>
+
+## The WIP sheet tab
+
+The **WIP sheet** tab shows the whole sheet the supplier receives, filled with every order in the tracker. The columns you set here are the only sheet layout: **Send now**, the scheduled sends, and reminders all attach this sheet.
 
 - **Order columns**: choose extra order details to include, such as item name, customer, quantity, or ex-factory date. **PO #** and **Style #** are always included, so the returned sheet can be matched to your orders.
-- **On each milestone**: turn **Plan date**, **Actual date**, and **Notes** on or off. Each milestone in the order's [profile](/milestones) becomes a group of columns.
-- Check the **Preview**, then click **Download .xlsx**.
+- **On each milestone**: turn **Plan date**, **Actual date**, and **Notes** on or off for every milestone, or click **Per milestone** to set them one by one. Each milestone becomes a group of columns.
+- The milestones come from the [profile](/milestones) most of the tracker's orders use, or your default profile. The tab names it under the title.
+- Changes save automatically. There's no Save button.
+- Click **Download .xlsx** to download exactly what the preview shows.
 
-You don't need to download it to email it. **Email supplier** attaches the sheet for you.
+A completed or cancelled tracker's sheet is read-only, but you can still download it.
 
 ## Email the supplier
 
 <Steps>
   <Step title="Open the email">
-    Click **Email supplier**. The **Send WIP email** dialog opens with the tracker's orders, the supplier's contacts, a ready-made message, and the WIP sheet attached.
+    On the tracker's **Emails** tab, click **Email supplier**. The **Send WIP email** dialog opens with the tracker's orders, the supplier's contacts, a ready-made message, and the WIP sheet attached.
 
     <Frame caption="The Send WIP email dialog, with the WIP sheet attached.">
       ![Send WIP email dialog with Selected POs and Selected supplier on the left, the email editor with To, Cc, Subject, and a message asking the supplier to fill in the attached WIP sheet, a preview on the right, and the attached Apparel WIP xlsx file](/images/wip/tracker-send-email.png)
@@ -196,57 +218,34 @@ You don't need to download it to email it. **Email supplier** attaches the sheet
     The supplier's contacts are filled in under **To**. Click **Edit contacts** to add or change contacts, and choose for each one whether it **Receive emails** or gets **Auto CC**. Add anyone else under **Cc**.
   </Step>
   <Step title="Check the message">
-    Edit the subject and message as you like, or click **Improve with AI**. Click **Field configure** to choose which order details appear in the email, and in what order. **Style #** and item name are always shown. The **Email preview** on the right shows what the supplier will see.
+    Edit the subject and message as you like, or click **Improve with AI**. The attached sheet uses the columns from the [WIP sheet tab](#the-wip-sheet-tab). The **Email preview** on the right shows what the supplier will see.
   </Step>
   <Step title="Send">
-    Click **Send now**. The email appears in the tracker's **Emails** tab, and on the **Emails** panel of each order in it.
+    Click **Send now**. The email appears in the tracker's **Emails** tab, and on the **Emails** tab of each order in it.
   </Step>
 </Steps>
 
 <Tip>
   The default message asks the supplier to "fill in the latest plan / actual
-  dates and return it on this thread". Keep that line: a sheet returned **on
-  this thread** is what gets applied automatically.
+  dates and return it on this thread". Keep that line: a reply **on this
+  thread** is linked to the tracker's orders without any PO numbers in it.
 </Tip>
 
 ## When the supplier replies
 
-When the supplier replies on the tracker's thread with the filled-in sheet attached, SourceReady reads the sheet and updates the milestones straight away. There's no review step.
+Every supplier email, whether it's a reply or a new message, goes to [Inbox](/inbox) as **Needs review**. Nothing on your orders changes until you check the proposed milestone updates there and click **Apply**. Each updated order's health and risk are then checked again, and its [Activity](/order-details#activity) shows the update.
 
-Under the reply in the **Emails** tab, a card shows what happened:
+An email shows up on a tracker when it's linked to at least one of the tracker's orders:
 
-<table>
-  <colgroup>
-    <col width='176' />
-    <col width='522' />
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Card</th>
-      <th>Meaning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>**Parsing WIP sheet…**</td>
-      <td>AI is reading the sheet</td>
-    </tr>
-    <tr>
-      <td>**AI update history**</td>
-      <td>
-        The sheet was applied. Each line shows an order, a milestone, and what
-        changed, such as `NSO-261001-FL03 · PP sample sent: actualDate →
-        2026-09-29`. Rows that didn't match an order are listed too
-      </td>
-    </tr>
-    <tr>
-      <td>**Parse failed**</td>
-      <td>The sheet couldn't be read. The card shows why</td>
-    </tr>
-  </tbody>
-</table>
+- A reply on a thread is linked to the same orders as the email it answers.
+- An email naming PO or style numbers is linked to those orders.
+- Anything else, such as a new email with no PO, is linked when you pick the order in Inbox.
 
-Each updated order's health and risk are checked again, and its [Activity](/order-details#activity) shows the milestone update.
+To answer the supplier, click **Reply** in Inbox. Replies are sent from the WIP mailbox and stay on the same thread.
+
+## The Emails tab
+
+The tracker's **Emails** tab lists every email linked to its orders, newest first. An order's **Emails** tab lists the emails linked to that order. Each email has **Reply**, and supplier emails have **Review in Inbox** to open their review.
 
 ## Next
 
